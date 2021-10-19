@@ -10,7 +10,8 @@ A new Flutter project about get ip address.
 - Android
 - IOS
 - MacOS
-- Web(Pending)
+- Web
+- Windows
 
 # Getting Started
 

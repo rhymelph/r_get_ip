@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'dart:convert';
 
 // In order to *not* need this ignore, consider extracting the "web" version
 // of your plugin as a separate package, instead of inlining it in the same
 // package as the core of your plugin.
 // ignore: avoid_web_libraries_in_flutter
-// import 'dart:html' as html show window;
+import 'dart:html' as html;
+import 'dart:typed_data';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
@@ -27,12 +29,27 @@ class RGetIpWeb {
   /// https://flutter.dev/go/federated-plugins
   Future<dynamic> handleMethodCall(MethodCall call) async {
     switch (call.method) {
-      // case 'getNetworkType':
-      //   return getPlatformVersion();
-      // case 'getInternalIP':
-      //   return getPlatformVersion();
-      // case 'getExternalIP':
-      //   return getPlatformVersion();
+      case 'getNetworkType':
+        return "wired";
+      case 'getInternalIP':
+        return "127.0.0.1";
+      case 'getExternalIP':
+        Completer<String> completer = Completer();
+        var xhr = html.HttpRequest()
+        ..open('GET', 'https://api.ipify.org/?format=json',async: true)
+        ..withCredentials =false;
+        xhr.onLoad.first.then((value){
+          var blob = xhr.response ?? html.Blob([]);
+          if(blob is String){
+            completer.complete(blob);
+          }else{
+            completer.complete('0.0.0.0');
+          }
+        });
+        xhr.send();
+        String result= await completer.future;
+        final map = json.decode(result);
+        return map['ip'];
       default:
         throw PlatformException(
           code: 'Unimplemented',
