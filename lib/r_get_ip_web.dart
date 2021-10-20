@@ -36,18 +36,18 @@ class RGetIpWeb {
       case 'getExternalIP':
         Completer<String> completer = Completer();
         var xhr = html.HttpRequest()
-        ..open('GET', 'https://api.ipify.org/?format=json',async: true)
-        ..withCredentials =false;
-        xhr.onLoad.first.then((value){
+          ..open('GET', 'https://api.ipify.org/?format=json', async: true)
+          ..withCredentials = false;
+        xhr.onLoad.first.then((value) {
           var blob = xhr.response ?? html.Blob([]);
-          if(blob is String){
+          if (blob is String) {
             completer.complete(blob);
-          }else{
+          } else {
             completer.complete('0.0.0.0');
           }
         });
         xhr.send();
-        String result= await completer.future;
+        String result = await completer.future;
         final map = json.decode(result);
         return map['ip'];
       default:
