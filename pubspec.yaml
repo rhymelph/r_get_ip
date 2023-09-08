@@ -1,6 +1,6 @@
 name: r_get_ip
 description: A new Flutter project about get ip address.
-version: 0.1.1
+version: 0.1.2
 homepage: https://github.com/rhymelph/r_get_ip
 
 environment:

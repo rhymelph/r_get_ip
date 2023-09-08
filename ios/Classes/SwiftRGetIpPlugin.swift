@@ -48,10 +48,10 @@ public class SwiftRGetIpPlugin: NSObject, FlutterPlugin {
                      let temp = String(cString: hostname)
 
                      if(temp.contains("fe80::") || temp.contains(":")){
-                         print(temp)
+//                          print(temp)
                      } else {
                          address = temp
-                         print(temp + " name:" + name)
+//                          print(temp + " name:" + name)
                      }
                  }
              }
@@ -69,12 +69,12 @@ public class SwiftRGetIpPlugin: NSObject, FlutterPlugin {
              Ipify.getPublicIPAddress { result in
                  switch result {
                  case .success(let ip):
-                     print(ip)
+//                      print(ip)
                      address = ip
                      self.dispatchGroup.leave()
 
                  case .failure(let error):
-                     print(error.localizedDescription)
+//                      print(error.localizedDescription)
                      address = ""
                      self.dispatchGroup.leave()
                  }
