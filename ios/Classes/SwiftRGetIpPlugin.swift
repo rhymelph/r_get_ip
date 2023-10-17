@@ -51,7 +51,8 @@ public class SwiftRGetIpPlugin: NSObject, FlutterPlugin {
 //                          print(temp)
                      } else {
                          address = temp
-//                          print(temp + " name:" + name)
+                         break;
+//                          print(temp + " name:" + name    )
                      }
                  }
              }

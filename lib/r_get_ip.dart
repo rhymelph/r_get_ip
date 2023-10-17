@@ -26,4 +26,9 @@ class RGetIp {
       return ip;
     }
   }
+
+  // static Future<List<String>?> get scanInternalIP async {
+  //   final String? ip = await _channel.invokeMethod('scanInternalIP');
+  //   return [];
+  // }
 }
